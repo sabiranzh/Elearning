@@ -21,15 +21,16 @@
                     <th>Name</th>
                     <th>Category</th>
                     <th>Desc</th>
+                    <th>Action</th>
              
                 </tr>
                 @foreach ($courses as $courses)
                 <tr>
                     <td>1</td>
-                    <td>{{$courses->nama}}</td>
-                    <td>{{$courses->nim}}</td>
-                    <td>{{$courses->class}}</td>
-                    <td>{{$courses->major}}</td>
+                    <td>{{$courses->name}}</td>
+                    <td>{{$courses->category}}</td>
+                    <td>{{$courses->desc}}</td>
+                    <td>{{$courses->action}}</td>
                     <td>
                         <a href="#" class="btn btn-wwarning">Edit</a>
                         <a href="#" class="btn btn-wwarning">Delete</a>
