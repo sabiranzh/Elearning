@@ -15,12 +15,13 @@
   <section class="section">
     <div class="card">
         <div class="card-body">
+          <a href="/admin/courses/create" class="btn btn-primary my-2">+ Courses</a>
             <table class="table">
                 <tr>
                     <th>No</th>
                     <th>Name</th>
                     <th>Category</th>
-                    <th>Desc</th>
+                    <th>Decs</th>
                     <th>Action</th>
              
                 </tr>
@@ -29,11 +30,14 @@
                     <td>1</td>
                     <td>{{$courses->name}}</td>
                     <td>{{$courses->category}}</td>
-                    <td>{{$courses->desc}}</td>
-                    <td>{{$courses->action}}</td>
-                    <td>
-                        <a href="#" class="btn btn-wwarning">Edit</a>
-                        <a href="#" class="btn btn-wwarning">Delete</a>
+                    <td>{{$courses->decs}}</td>
+                    <td class="d-flex">
+                        <a href="/admin/courses/edit/{{$courses->id}}" class="btn btn-warning me-2">Edit</a>
+                        <form action="/admin/courses/delete/{{$courses->id}}" method="post">
+                          @method('DELETE')
+                          @csrf
+                          <button class="btn btn-danger" onclick="return confirm ('Apakah anda yakin?')">Hapus</button>
+                          </form>
                     </td>
                 </tr>
                
