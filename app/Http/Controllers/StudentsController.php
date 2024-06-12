@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Courses;
 use App\Models\Students;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,11 @@ class StudentsController extends Controller
 
     //method untuk menampilkan data create
     public function create(){
-        return view('admin.contents.student.create');
+        //mendapatkan data courses
+        $courses = Courses::all();
+        //memanggil view
+        return view('admin.contents.student.create',
+        ['courses' => $courses]);
     }
 
 
@@ -34,6 +39,7 @@ class StudentsController extends Controller
         'nim' => 'required|numeric',
         'major' => 'required',
         'class' => 'required',
+        'courses_id' => 'nullable',
        ]);
 
        // simpan ke database
@@ -42,6 +48,7 @@ class StudentsController extends Controller
         'nim' => $request->nim,
         'major' => $request->major,
         'class' => $request->class,
+        'courses_id' => $request->courses_id
        ]);
 
        //kembalikan ke halaman student
@@ -54,8 +61,11 @@ class StudentsController extends Controller
         //cari data berdasarkan id
         $Students = Students::find ($id); //Select * FROM students WHERE id = $id;
 
+        $courses = Courses::all();
+
         return view('admin.contents.student.edit', [
-            'Students' => $Students
+            'Students' => $Students,
+            'courses' => $courses,
         ]);
     }
 
@@ -70,6 +80,7 @@ class StudentsController extends Controller
         'nim' => 'required|numeric',
         'major' => 'required',
         'class' => 'required',
+        'courses_id' => 'nullable',
        ]);
 
     //simpan perubahan
@@ -78,6 +89,7 @@ class StudentsController extends Controller
         'nim' => $request->nim,
         'major' => $request->major,
         'class' => $request->class,
+        'courses_id' => $request->courses_id,
        ]);
        //kembalikan ke halaman student
        return redirect('/admin/student') -> with ('message', 'Berhasil Mengedit Student');
